@@ -85,11 +85,11 @@ WSGI_APPLICATION = 'PocketApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DATABASE_NAME'),
-        'USER': env("DATABASE_USER"),
-        'PASSWORD': env("DATABASE_PASS"),
-        'HOST': env("DATABASE_HOST"),
-        'PORT': env("DATABASE_PORT"),
+        'NAME': 'd65438afqf64fn',
+        'USER': 'sgccglrippitka',
+        'PASSWORD': '3ae35cc3f4fc6365b3e98b86041051f24747e5a72b5a1fe8c7ced3facd7f1d31',
+        'HOST': 'ec2-3-211-228-251.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
