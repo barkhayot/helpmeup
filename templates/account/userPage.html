@@ -1,0 +1,95 @@
+{% extends "base/base.html" %}
+{% block content %}
+<div class="container">
+    
+    <h1>{{user.username}}'s Page</h1>
+    
+  
+    <br>
+    <br>
+    <h3>My Notes</h2>
+    <hr>
+    <br>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for note in notes %}
+        <div class="col">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+              <div class="card-body">
+                  <p class="card-text">{{note.content}}</p>
+                <a href="{% url 'noteDelete' note.id %}" class="btn btn-danger">Delete</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+    </div>
+    <div class="text-center" >
+        <span class="step-links">
+                <a href="{% url 'allNotes' %}" class="btn  btn-block btn-primary" >View All</a>
+        </span>
+        <br>
+        <br>
+    </div>
+    <br>
+        
+    <h3>My Links</h2>
+        <hr>
+        <br>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for link in links %}
+            <div class="col">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                  <div class="card-body" style="text-align: center;">
+                      <a href="{{link.url_link}}" style="text-decoration: none; color: black;" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                        <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                        <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                      </svg>
+                    </a>
+                      <h2>{{link.title}}</h2>
+                      <p class="card-text" style="font-size: 8px;">{{link.url_link|slice:"30"}}</p>
+                      <a href="{% url 'URLDelete' link.id %}" class="btn btn-danger">remove</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+        </div>
+        <div class="text-center" >
+            <span class="step-links">
+                    <a href="{% url 'allURL' %}" class="btn  btn-block btn-primary" >View All</a>
+            </span>
+            <br>
+            <br>
+        </div>
+        <br>
+
+    <h3>My Charts</h2>
+        <hr>
+        <br>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for chart in charts %}
+            <div class="col">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                  <div class="card-body" style="text-align: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z"/>
+                      </svg>
+                      <hr>
+                      <h2>{{chart.chart_name}}</h2>
+                      <p class="card-text">{{chart.description|slice:'25'}}</p>
+                    <a href="{% url 'chart_detail_view' chart.id %}" class="btn btn-primary">Veiw</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+        </div>
+        <div class="text-center" >
+            <span class="step-links">
+                    <a href="{% url 'all_chart_view' %}" class="btn  btn-block btn-primary" >View All</a>
+            </span>
+            <br>
+            <br>
+        </div>
+        <br>
+
+
+{% endblock %}

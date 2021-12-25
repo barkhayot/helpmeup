@@ -1,0 +1,53 @@
+{% extends "base/base.html" %}
+{% block content %}
+
+<div class="container">
+  <h1>Notes Page</h1>
+
+  <br>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+          <form action="" method="POST">
+            {% csrf_token %}
+            {{form.content}}
+            <br>
+            <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+          </div>
+        </div>
+    {% for note in page_obj %}
+      
+        <div class="col">
+          <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+                <p class="card-text">{{note.content}}</p>
+              <a href="{% url 'noteDelete' note.id %}" class="btn btn-danger">Delete</a>
+            </div>
+          </div>
+        </div>
+
+
+
+    {% endfor %}
+</div>
+  <div class="text-center" >
+    <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn  btn-block btn-primary" >Previous</a>
+            {% endif %}
+    
+            
+    
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn  btn-block btn-primary">Next</a>
+            {% endif %}
+    </span>
+    <br>
+    <br>
+</div>
+<br>
+<br>
+<br>
+</div>
+{% endblock %}

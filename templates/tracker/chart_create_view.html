@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+{% block content %}
+
+<div class="container">
+
+    <div class="card bg-light" style="text-align: center;">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Chart create</h4>
+            <hr>
+            <p>Create your charts and track your data with us.</p>
+            <br>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <h5 style="text-align: left;">Name :</h5>
+                {{form.chart_name}}
+                <br>
+                <h5 style="text-align: left;">Description :</h5>
+                {{form.description}}
+                <br>
+                <button class="btn btn-primary" type="submit">Create</button>
+            </form>
+        </article>
+    </div>    
+
+
+
+
+
+</div>
+{% endblock %}

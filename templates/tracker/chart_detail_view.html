@@ -1,0 +1,138 @@
+{% extends "base/base.html" %}
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container">
+    <h1>Chart Detail</h1>
+    <br>
+    <div class="row mt-3 pt-3">
+        <div class="col-md-8">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                <h3>Name :  {{chart.chart_name}}</h3>
+                <p>Description {{chart.description}}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class=" card shadow-lg p-3 mb-5 bg-white rouded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z"/>
+                  </svg>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="row mt-3 pt-3" >
+        <div class="col" style="text-align: center; width: 80%; height: 80%;">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                <canvas id="myChart" width:"100" height:"50"></canvas>
+                <script>
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: [{% for chart_data in chart_datas %} '{{chart_data.data_name}}', {% endfor %}],
+                            datasets: [{
+                                label: 'Data',
+                                data: [{% for chart_data in chart_datas %} '{{chart_data.data}}', {% endfor %}
+                                ],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card bg-light" >
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Add your data</h4>
+            <br>
+            <form action="" method="POST">
+                {% csrf_token %}
+            <div class="row" style="text-align: center;">
+                    <div class="col-5">
+                        {{form.data_name}}
+                    </div>
+                    <div class="col-5">
+                        {{form.data}}
+                    </div>
+                    <div class="col-2">
+                    <button class="btn btn-primary" type="submit">Add</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </article>
+    </div>
+    <br>
+    <h3 class="text-center">Table of DATAs</h3>
+    <br>
+    <div class="table-responsive">
+        <table class="table text-center">
+          <thead>
+            <tr>
+              <th style="width: 20%;"></th>
+              <th style="width: 80%;">Value</th>
+              <th style="width: 100%;">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for chart_data in chart_datas %}
+            <tr>
+              <th scope="row" class="text-start">{{chart_data.data_name}}</th>
+              <td>{{chart_data.data}}</td>
+              <td>
+                <a href="{% url 'chart_data_delete' chart_data.id %}" style="text-decoration: none; color: black;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </svg>
+                </a>
+            </td>
+            </tr>
+            {% endfor %}
+
+            
+        </table>
+      </div>
+
+
+
+    <br>
+    
+    
+
+
+    <br>
+    <br>
+    <a href="{% url 'chart_delete' chart.id %}" class="btn btn-danger btn-block btn-lg">Delete Chart</a>
+
+    
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+
+
+{% extends "base/base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+        <div class="card-body">
+            <!-- Create a Form -->
+            <form method="POST">
+                <!-- Security token by Django -->
+                {% csrf_token %}
+                <h4 class="card-text ">Do you really want to delete this Data Chart ?</h4>
+                <h5> Data Chart: <span style="font-style: oblique;">{{chart.chart_name}}</span></h5>
+                <br>
+                <input type="submit" class="btn btn-danger btn" value="Yes" />
+                <a href="{% url 'all_chart_view' %}" class="btn btn-primary  btn">Cancel </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
