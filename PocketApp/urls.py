@@ -25,6 +25,9 @@ urlpatterns = [
     path('links/', include('url_data.urls')),
     path('auth/', include('account.urls')),
 
+    #API 
+    path('api/', include('api.urls')),
+
 ]
 
 handler404 = "PocketApp.views.handle_not_found"

@@ -15,7 +15,7 @@ class testCHART(models.Model):
 
 class testCHART_DATA(models.Model):
     user  = models.ForeignKey(User, on_delete=models.CASCADE)
-    chart = models.ForeignKey(testCHART, on_delete=models.CASCADE)
+    chart = models.ForeignKey(testCHART, related_name='chart_data', on_delete=models.CASCADE)
     data_name = models.CharField(max_length=50)
     data = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
