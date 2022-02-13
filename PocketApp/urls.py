@@ -20,6 +20,7 @@ from . import views
 urlpatterns = [
     path('secure/adminpage', admin.site.urls),
     path('', views.index, name='index'),
+    path('time/', views.time, name='time'),
     path('notes/', include('notes.urls')),
     path('track/', include('tracker_chart.urls')),
     path('links/', include('url_data.urls')),
