@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row row-cols-1 row-cols-md g-4">
+        <div class="col-md">
+    
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">{{ blog.title }}</h2>
+            <p class="text-muted" style="font-size: 12px;">Posted by : {{blog.user.username}} | Created at : {{blog.created_at | date:"F d, Y"}}</p>
+            <br>
+            <hr>
+            <p class="card-text">{{blog.content| safe}}</p>
+            <hr>
+            {% if blog.user == request.user %}
+            <a href="{% url 'updateblog' blog.id %}" class="btn" style="color: white; background-color: #202020;">Update</a>
+            <a href="{% url 'blogdelete' blog.id %}" class="btn" style="color: white; background-color: #a50909;">Delete Blog</a>
+            {% else %}
+            <p>Thanks for reading blog</p>
+            {% endif %}
+        </div>
+    </div>
+     
+    </div>
+    </div>
+</div>
+
+{% endblock %}

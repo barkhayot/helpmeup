@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row row-cols-1 row-cols-md g-4">
+        <div class="col-md-6">
+            <div class="card mb-4 shadow-lg p-3 bg-white rounded">
+                <div class="card-body" style="text-align: center;">
+                    <a href="{% url 'createblog' %}" class="btn" style="color: white; background-color: black; border-radius: -30%;">Create blog</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4 shadow-lg p-3 bg-white rounded">
+                <div class="card-body" style="text-align: center;">
+                    <a href="{% url 'userblog' %}" class="btn" style="color: white; background-color: black; border-radius: -30%;">My Blogs</a>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="row row-cols-1 row-cols-md g-4">
+        <div class="col-md">
+    
+            {% for blog in page_obj %}
+            <div class="card mb-4 shadow-lg p-3 bg-white rounded">
+                <div class="card-body">
+                        <h3 class="card-title">{{ blog.title }}</h3>
+                        <p class="text-muted" style="font-size: 12px;">Posted by : {{blog.user.username}} | Created at : {{blog.created_at | date:"F d, Y"}}</p>
+                        <p class="text-muted" style="font-size: 12px; margin-top: -15px;">Status : Public <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg></p>
+                        <hr>
+                        <p class="card-text" style=" width: auto; font-size: 14px;">{{blog.content |truncatechars_html:200 | safe }} </p>
+                        <hr>
+                        <a href="{% url 'blogdetail' blog.id %}" class="btn" style="color: white; background-color: black;">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="text-center" >
+        <span class="step-links">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn  btn-block btn-dark" >Previous</a>
+                {% endif %}
+        
+                
+        
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn  btn-block btn-dark">Next</a>
+                {% endif %}
+        </span>
+        <br>
+        <br>
+    </div>
+    
+</div>
+
+{% endblock %}

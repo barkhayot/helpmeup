@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-i7!@(3()3@1!&9paap1gl&&%edod7q1_mty8s(ry&q=5kvunpp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -47,9 +47,11 @@ INSTALLED_APPS = [
     'notes',
     'tracker_chart',
     'account',
+    'blog',
     'rest_framework',
     'rest_framework.authtoken',
     'api',
+    'ckeditor',
 ]
 
 REST_FRAMEWORK = {
@@ -71,6 +73,19 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'PocketApp.urls'
+
+CKEDITOR_CONFIGS = {
+'default': {
+    'toolbar': [
+        ["Bold", "Italic", "Underline", "Strike", "NumberedList", 
+        "BulletedList", "Blockquote", "JustifyLeft", "JustifyCenter", "JustifyRight", 
+        "JustifyBlock", "Link", "Image", "Styles" , "Font", "FontSize","TextColor", "BGColor", 'Iframe', 
+        "CodeSnippet", 'Source']
+        ],
+        'extraPlugins': 'codesnippet',
+    'width': 'auto' },
+}
+    
 
 TEMPLATES = [
     {

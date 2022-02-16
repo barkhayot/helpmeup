@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="blog">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="header" style="padding-left: -5px;">
+                {{form.title}}
+                <p style="font-size: 13px; color:red"> NOTE - If you are appying image to your post Please leave With and Height value empty in order not to break your post page</p>
+                <br>
+            </div>
+            <div>
+                {{form.media}}
+                {{form.content}}
+            </div>
+            <br>
+            <div>
+                <h5>Private Post  {{form.private}} </h5>
+            </div>
+            <br>
+            <button class="btn" style="color: white; background-color: #202020;">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
