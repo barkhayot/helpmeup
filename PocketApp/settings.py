@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'url_data',
     'notes',
     'tracker_chart',
@@ -52,7 +53,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'api',
     'ckeditor',
-    'django-cors-headers',
+    
 ]
 
 REST_FRAMEWORK = {
@@ -168,4 +169,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+CORS_ORIGIN_ALLOW_ALL = True
 
