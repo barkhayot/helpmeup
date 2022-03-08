@@ -21,6 +21,7 @@ urlpatterns = [
     path('secure/adminpage', admin.site.urls),
     path('', views.index, name='index'),
     path('time/', views.time, name='time'),
+     path('calc/', views.calc, name='calc'),
     path('blog/', include('blog.urls')),
     path('notes/', include('notes.urls')),
     path('track/', include('tracker_chart.urls')),
